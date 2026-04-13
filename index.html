@@ -48,7 +48,7 @@
             const dateStr = date.toISOString().split('T')[0].replace(/-/g, '');
             reports.push({
                 date: date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' }),
-                filename: `reports/BTC_daily_${dateStr}.html`
+                filename: `reports/BTC_daily_report_${dateStr}.html`
             });
         }
 
