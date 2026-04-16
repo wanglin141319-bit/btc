@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTC每日行情分析报告 - 2026年04月15日</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-green: #3fb950;
+            --accent-red: #f85149;
+            --accent-yellow: #d29922;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-orange: #f78166;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #f7931a, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .header .date {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+        }
+        
+        .header .author {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+        
+        /* Section */
+        .section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+        
+        .section-title .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+        
+        .tag {
+            background: var(--accent-purple);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-left: auto;
+        }
+        
+        /* Price Hero */
+        .price-hero {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(247,147,26,0.1), rgba(255,215,0,0.05));
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .price-hero .symbol {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        
+        .price-hero .price {
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .price-hero .change {
+            font-size: 1.5em;
+            padding: 8px 20px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .price-hero .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .price-hero .stat {
+            text-align: center;
+        }
+        
+        .price-hero .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+        
+        .price-hero .stat-value {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        /* Card */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-purple);
+        }
+        
+        .card-title {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .card-value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+        
+        .card-sub {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            text-align: left;
+            padding: 12px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        /* Signal */
+        .signal-item {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+        
+        .signal-bullish {
+            background: rgba(63,185,80,0.1);
+            border: 1px solid rgba(63,185,80,0.3);
+            color: var(--accent-green);
+        }
+        
+        .signal-bearish {
+            background: rgba(248,81,73,0.1);
+            border: 1px solid rgba(248,81,73,0.3);
+            color: var(--accent-red);
+        }
+        
+        .signal-neutral {
+            background: rgba(210,153,34,0.1);
+            border: 1px solid rgba(210,153,34,0.3);
+            color: var(--accent-yellow);
+        }
+        
+        .signal-icon {
+            margin-right: 8px;
+        }
+        
+        .signal-label {
+            font-weight: 600;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-card);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        
+        /* Strategy Box */
+        .strategy-box {
+            background: linear-gradient(135deg, rgba(63,185,80,0.08), rgba(88,166,255,0.08));
+            border: 1px solid rgba(63,185,80,0.3);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .strategy-box.bear {
+            background: linear-gradient(135deg, rgba(248,81,73,0.08), rgba(247,129,102,0.08));
+            border-color: rgba(248,81,73,0.3);
+        }
+        
+        .strategy-box.neutral {
+            background: linear-gradient(135deg, rgba(210,153,34,0.08), rgba(163,113,247,0.08));
+            border-color: rgba(210,153,34,0.3);
+        }
+        
+        .strategy-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .badge-long {
+            background: rgba(63,185,80,0.2);
+            color: var(--accent-green);
+        }
+        
+        .badge-short {
+            background: rgba(248,81,73,0.2);
+            color: var(--accent-red);
+        }
+        
+        .badge-neutral {
+            background: rgba(210,153,34,0.2);
+            color: var(--accent-yellow);
+        }
+        
+        .strategy-level {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .strategy-level.primary { border-left-color: var(--accent-green); }
+        .strategy-level.sl { border-left-color: var(--accent-red); }
+        .strategy-level.tp { border-left-color: var(--accent-purple); }
+        
+        .strategy-level .tag {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            min-width: 60px;
+            text-transform: uppercase;
+        }
+        
+        .strategy-level .prices {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: rgba(210,153,34,0.1);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .warning-box h3 {
+            color: var(--accent-yellow);
+            margin-bottom: 12px;
+        }
+        
+        .warning-box ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+        
+        .warning-box li {
+            margin-bottom: 8px;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-hero .price {
+                font-size: 2.5em;
+            }
+            
+            .price-hero .stats {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ========== 1. 价格概览 ========== -->
+    <div class="header">
+        <h1>BTC 每日行情分析报告</h1>
+        <div class="date">2026年04月15日 | 10:40 UTC+8</div>
+        <div class="author">MK Trading | bitebiwang1413</div>
+    </div>
+
+    <div class="price-hero">
+        <div class="symbol">BTC / USDT</div>
+        <div class="price" style="color: #f85149;">$74,230.00</div>
+        <div class="change" style="background: #f8514920; color: #f85149;">
+            ▼ -0.18% (24h)
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">24h最高</div>
+                <div class="stat-value" style="color: var(--accent-green);">$75,829.00</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">24h最低</div>
+                <div class="stat-value" style="color: var(--accent-red);">$73,978.00</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">24h成交量</div>
+                <div class="stat-value">$55.07B</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">市值</div>
+                <div class="stat-value">$1486.10B</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">距ATH</div>
+                <div class="stat-value">-41.1%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 2. 24h图表 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(88,166,255,0.2);">📈</span>
+            BTC 24H 价格走势
+            <span class="tag">LIVE</span>
+        </div>
+        <div class="chart-container">
+            <canvas id="priceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- ========== 3. 宏观事件 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(247,129,102,0.2);">📅</span>
+            宏观事件日历
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>事件</th>
+                    <th>影响</th>
+                    <th>预期</th>
+                    <th>实际</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        <tr>
+            <td>04-15</td>
+            <td>美联储利率决议</td>
+            <td><span style="color:#f85149">高</span></td>
+            <td>维持不变</td>
+            <td>待公布</td>
+        </tr>
+        <tr>
+            <td>04-16</td>
+            <td>美国CPI数据</td>
+            <td><span style="color:#f85149">高</span></td>
+            <td>3.2%</td>
+            <td>待公布</td>
+        </tr>
+        <tr>
+            <td>04-18</td>
+            <td>美国零售销售</td>
+            <td><span style="color:#d29922">中</span></td>
+            <td>0.3%</td>
+            <td>待公布</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========== 4. 技术分析 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(163,113,247,0.2);">📊</span>
+            技术指标
+            <span class="tag">TECH</span>
+        </div>
+        <div class="grid grid-4">
+            <div class="card">
+                <div class="card-title">RSI(14)</div>
+                <div class="card-value" style="color: var(--text-primary)">54.5</div>
+                <div class="card-sub">中性</div>
+            </div>
+            <div class="card">
+                <div class="card-title">MACD</div>
+                <div class="card-value" style="color: var(--accent-red)">-1.47</div>
+                <div class="card-sub">死叉</div>
+            </div>
+            <div class="card">
+                <div class="card-title">布林带位置</div>
+                <div class="card-value">32.4%</div>
+                <div class="card-sub">相对中轨位置</div>
+            </div>
+            <div class="card">
+                <div class="card-title">ATR(14)</div>
+                <div class="card-value">0.23%</div>
+                <div class="card-sub">波动率指标</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 5. K线形态 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(88,166,255,0.2);">🕯️</span>
+            K线形态分析
+        </div>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-title">短期趋势 (1H/4H)</div>
+                <div class="card-value" style="color: var(--accent-red)">下跌</div>
+                <div class="card-sub">1H变化: -0.43%</div>
+            </div>
+            <div class="card">
+                <div class="card-title">中期趋势 (1D/1W)</div>
+                <div class="card-value" style="color: var(--accent-green)">上涨</div>
+                <div class="card-sub">7D变化: +3.88%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 6. 资金费率 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(63,185,80,0.2);">💰</span>
+            资金费率 (Funding Rate)
+            <span class="tag">DERIVATIVES</span>
+        </div>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-title">当前资金费率</div>
+                <div class="card-value" style="color: var(--accent-yellow)">-0.0104%</div>
+                <div class="card-sub">正常范围</div>
+            </div>
+            <div class="card">
+                <div class="card-title">主要交易所</div>
+                <div class="card-value" style="font-size: 1.2em;">Binance: -0.0104%</div>
+                <div class="card-sub">8小时结算周期</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 7. 合约数据 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(163,113,247,0.2);">📉</span>
+            合约市场数据
+            <span class="tag">DERIVATIVES</span>
+        </div>
+        <div class="grid grid-4">
+            <div class="card">
+                <div class="card-title">持仓量 (OI)</div>
+                <div class="card-value">$7.34B</div>
+                <div class="card-sub">全网合约持仓</div>
+            </div>
+            <div class="card">
+                <div class="card-title">多空比</div>
+                <div class="card-value" style="color: var(--accent-green)">0.7050</div>
+                <div class="card-sub">多41.4% / 空58.6%</div>
+            </div>
+            <div class="card">
+                <div class="card-title">多头爆仓 (24h)</div>
+                <div class="card-value" style="color: var(--accent-red);">$0.00</div>
+                <div class="card-sub">0 笔</div>
+            </div>
+            <div class="card">
+                <div class="card-title">空头爆仓 (24h)</div>
+                <div class="card-value" style="color: var(--accent-green);">$0.00</div>
+                <div class="card-sub">0 笔</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 8. 矿工动态 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(247,147,26,0.2);">⛏️</span>
+            矿工动态
+        </div>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-title">流通供应量</div>
+                <div class="card-value">20.02M BTC</div>
+                <div class="card-sub">约 95.3% 已挖出</div>
+            </div>
+            <div class="card">
+                <div class="card-title">矿工收入估算</div>
+                <div class="card-value">~$40-50M/天</div>
+                <div class="card-sub">基于区块奖励+手续费</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 9. 链上指标 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(88,166,255,0.2);">🔗</span>
+            链上指标
+        </div>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-title">活跃地址数 (估算)</div>
+                <div class="card-value">~900K</div>
+                <div class="card-sub">24h活跃地址</div>
+            </div>
+            <div class="card">
+                <div class="card-title">链上交易量 (估算)</div>
+                <div class="card-value">~$25B</div>
+                <div class="card-sub">24h链上转账金额</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 10. ETF资金流 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(63,185,80,0.2);">📊</span>
+            ETF资金流向
+        </div>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-title">美国现货ETF净流入</div>
+                <div class="card-value" style="color: var(--accent-green);">+$150M (估算)</div>
+                <div class="card-sub">昨日资金流入</div>
+            </div>
+            <div class="card">
+                <div class="card-title">ETF总持仓</div>
+                <div class="card-value">~1.1M BTC</div>
+                <div class="card-sub">约占比特币流通量5.5%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 11. 机构动态 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(163,113,247,0.2);">🏢</span>
+            机构动态
+        </div>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-title">MicroStrategy持仓</div>
+                <div class="card-value">~538K BTC</div>
+                <div class="card-sub">平均成本 ~$36K</div>
+            </div>
+            <div class="card">
+                <div class="card-title">机构持仓趋势</div>
+                <div class="card-value" style="color: var(--accent-green);">增持</div>
+                <div class="card-sub">近期机构持续买入</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 12. 恐慌贪婪指数 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(210,153,34,0.2);">😨😀</span>
+            恐慌贪婪指数 (Fear & Greed Index)
+        </div>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-title">当前指数</div>
+                <div class="card-value" style="color: #f85149;">23</div>
+                <div class="card-sub">极度恐惧</div>
+            </div>
+            <div class="card">
+                <div class="card-title">市场情绪</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 23%; background: #f85149;"></div>
+                </div>
+                <div class="card-sub" style="margin-top: 8px;">0=极度恐惧 | 50=中性 | 100=极度贪婪</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 13. 阻力支撑位 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(247,129,102,0.2);">🎯</span>
+            关键支撑/阻力位
+            <span class="tag">TECH</span>
+        </div>
+        <div class="grid grid-4">
+            <div class="card">
+                <div class="card-title">阻力位 R2</div>
+                <div class="card-value" style="color: var(--accent-red);">$77,485.60</div>
+                <div class="card-sub">强阻力</div>
+            </div>
+            <div class="card">
+                <div class="card-title">阻力位 R1</div>
+                <div class="card-value" style="color: var(--accent-red);">$76,351.67</div>
+                <div class="card-sub">短期阻力</div>
+            </div>
+            <div class="card">
+                <div class="card-title">支撑位 S1</div>
+                <div class="card-value" style="color: var(--accent-green);">$73,282.63</div>
+                <div class="card-sub">短期支撑</div>
+            </div>
+            <div class="card">
+                <div class="card-title">支撑位 S2</div>
+                <div class="card-value" style="color: var(--accent-green);">$72,172.29</div>
+                <div class="card-sub">强支撑</div>
+            </div>
+        </div>
+        <div style="margin-top: 16px; padding: 16px; background: var(--bg-card); border-radius: 8px;">
+            <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 8px;">枢轴点: $74,726.73</div>
+            <div style="font-size: 0.85em; color: var(--text-secondary);">* 基于近24h高低点估算，仅供参考</div>
+        </div>
+    </div>
+
+    <!-- ========== 14. 交易信号 ========== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon" style="background: rgba(88,166,255,0.2);">💡</span>
+            交易信号与建议
+        </div>
+        <div class="strategy-box bear">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <span class="strategy-badge badge-short">轻空</span>
+                <span style="color: var(--text-secondary);">置信度 55.0%</span>
+            </div>
+            
+            <div class="strategy-level primary">
+                <span class="tag">进场</span>
+                <span class="prices">$74,511.24 - $74,645.63</span>
+                <span style="color: var(--text-secondary); flex: 1; text-align: right;">建议入场区间</span>
+            </div>
+            <div class="strategy-level sl">
+                <span class="tag">止损</span>
+                <span class="prices">$74,813.61</span>
+                <span style="color: var(--text-secondary); flex: 1; text-align: right;">风险控制</span>
+            </div>
+            <div class="strategy-level tp">
+                <span class="tag">TP1</span>
+                <span class="prices">$74,057.67</span>
+                <span style="color: var(--text-secondary); flex: 1; text-align: right;">第一目标位</span>
+            </div>
+            <div class="strategy-level tp">
+                <span class="tag">TP2</span>
+                <span class="prices">$73,553.71</span>
+                <span style="color: var(--text-secondary); flex: 1; text-align: right;">第二目标位</span>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 8px;">信号详情：</div>
+                
+        <div class="signal-item signal-bearish">
+            <span class="signal-icon">▼</span>
+            <span class="signal-label">[看空]</span> MACD柱负值，动能偏空
+        </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 15. 风险提示 ========== -->
+    <div class="warning-box">
+        <h3>⚠️ 风险提示</h3>
+        <ul>
+            <li>加密货币市场7x24小时运行，波动性极高，杠杆交易风险加倍</li>
+            <li>合约交易存在强制平仓风险，请严格控制仓位和杠杆倍数（建议不超过5倍）</li>
+            <li>资金费率、多空比等衍生品数据仅供参考，不构成交易信号</li>
+            <li>本报告由自动化系统生成，数据可能存在延迟或偏差，请以交易所实际数据为准</li>
+            <li>宏观经济事件（如美联储利率决议、CPI数据）可能导致市场剧烈波动</li>
+            <li>DYOR - 请自行研究后决策，理性交易，切勿投入超过承受能力的资金</li>
+        </ul>
+    </div>
+
+    <!-- ========== 16. 免责声明 ========== -->
+    <div class="footer">
+        <p><strong>免责声明</strong></p>
+        <p>本报告仅供参考，不构成任何投资建议。加密货币投资具有高风险，价格可能大幅波动，</p>
+        <p> past performance does not guarantee future results。请根据自身情况独立判断，谨慎决策。</p>
+        <p style="margin-top: 16px;">数据来源: CoinGecko | Binance | Alternative.me | 各公开API</p>
+        <p>报告生成时间: 2026年04月15日 10:40 | MK Trading | bitebiwang1413</p>
+        <p style="margin-top: 8px; font-size: 0.8em;">© 2026 BTC每日分析系统 | 自动化生成</p>
+    </div>
+
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    (function() {
+        const labels = ['10:44','11:14','11:44','12:14','12:44','13:14','13:44','14:14','14:44','15:14','15:44','16:14','16:44','17:14','17:44','18:14','18:44','19:14','19:44','20:14','20:44','21:15','21:44','22:14','22:44','23:14','23:44','00:14','00:44','01:14','01:44','02:14','02:44','03:14','03:44','04:14','04:44','05:14','05:44','06:14','06:44','07:14','07:44','08:14','08:44','09:14','09:44','10:14'];
+        const prices = [74439.49,74417.16,74490.98,74442.75,74403.67,74380.37,74314.19,74349.56,74428.16,74753.28,74541.01,74569.24,74705.38,74798.25,74583.50,74534.05,74411.78,74426.97,74372.12,74326.27,74351.84,74577.31,75196.01,75595.71,75488.27,74751.68,75273.88,75506.06,75263.14,74801.08,74570.45,74728.03,74304.09,74350.88,74155.07,74401.56,74242.35,74237.11,74025.95,74365.69,74022.86,74104.73,74192.20,74557.70,74574.23,74717.91,74632.92,74561.63];
+        
+        if (prices.length > 0) {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            const isUp = prices[0] <= prices[prices.length - 1];
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'BTC/USDT',
+                        data: prices,
+                        borderColor: isUp ? '#3fb950' : '#f85149',
+                        backgroundColor: isUp ? 'rgba(63,185,80,0.1)' : 'rgba(248,81,73,0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { 
+                            grid: { color: 'rgba(255,255,255,0.05)' }, 
+                            ticks: { color: '#8b949e', maxTicksLimit: 8 } 
+                        },
+                        y: { 
+                            grid: { color: 'rgba(255,255,255,0.05)' }, 
+                            ticks: { color: '#8b949e' } 
+                        }
+                    }
+                }
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

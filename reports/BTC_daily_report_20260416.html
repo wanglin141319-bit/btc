@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTC 每日日报 2026年04月16日</title>
+    <style>
+        :root {--bg:#0a0e17;--card:#111827;--card2:#1a2332;--border:#1e2d3d;--text:#e2e8f0;--sub:#64748b;--purple:#7c3aed;--orange:#f59e0b;--green:#22c55e;--red:#ef4444;--yellow:#eab308;--blue:#3b82f6;}
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:16px;}
+        .c {max-width:1400px;margin:0 auto;}
+        .h {background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f172a 100%);border:1px solid var(--purple);border-radius:16px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
+        .h::before {content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(124,58,237,0.08),transparent 50%);pointer-events:none;}
+        .h h1 {font-size:2em;color:var(--orange);margin-bottom:6px;position:relative;}
+        .h .sub {color:var(--sub);font-size:1em;}
+        .h .badge {display:inline-block;margin-top:8px;background:rgba(124,58,237,0.2);color:var(--purple);padding:3px 12px;border-radius:20px;font-size:0.8em;border:1px solid rgba(124,58,237,0.3);}
+        .s {background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px;position:relative;}
+        .s::before {content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;background:var(--purple);border-radius:3px;}
+        .sh {display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+        .sh h2 {font-size:1.15em;color:var(--text);}
+        .tag {font-size:0.7em;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;}
+        .tag-live {background:rgba(34,197,94,0.15);color:var(--green);border:1px solid rgba(34,197,94,0.3);}
+        .tag-tech {background:rgba(59,130,246,0.15);color:var(--blue);border:1px solid rgba(59,130,246,0.3);}
+        .tag-deriv {background:rgba(245,158,11,0.15);color:var(--orange);border:1px solid rgba(245,158,11,0.3);}
+        .tag-macro {background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3);}
+        .tag-chain {background:rgba(168,85,247,0.15);color:#a855f7;border:1px solid rgba(168,85,247,0.3);}
+        .tag-risk {background:rgba(234,179,8,0.15);color:var(--yellow);border:1px solid rgba(234,179,8,0.3);}
+        .hero {background:linear-gradient(135deg,#0f172a,#1e1b4b);border-radius:14px;padding:32px;text-align:center;margin-bottom:20px;border:1px solid var(--border);}
+        .hero .sym {color:var(--orange);font-size:1.1em;margin-bottom:6px;font-weight:600;}
+        .hero .price {font-size:3.5em;font-weight:bold;margin-bottom:6px;letter-spacing:-1px;}
+        .hero .chg {font-size:1.3em;padding:4px 16px;border-radius:8px;display:inline-block;font-weight:600;}
+        .hero .chg.up {background:rgba(34,197,94,0.15);color:var(--green);}
+        .hero .chg.down {background:rgba(239,68,68,0.15);color:var(--red);}
+        .row3 {display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+        .cd {background:var(--card2);border-radius:10px;padding:16px;border:1px solid var(--border);transition:all 0.2s;}
+        .cd:hover {border-color:var(--purple);transform:translateY(-2px);}
+        .g {display:grid;gap:12px;}
+        .g4 {grid-template-columns:repeat(4,1fr);}
+        .g3 {grid-template-columns:repeat(3,1fr);}
+        .g2 {grid-template-columns:repeat(2,1fr);}
+        .sc {background:var(--card2);border-radius:8px;padding:14px;text-align:center;border:1px solid var(--border);}
+        .sc .lbl {color:var(--sub);font-size:0.8em;margin-bottom:4px;}
+        .sc .val {font-size:1.3em;font-weight:bold;}
+        table {width:100%;border-collapse:collapse;}
+        th {text-align:left;padding:8px 12px;color:var(--sub);border-bottom:1px solid var(--border);font-size:0.85em;font-weight:600;}
+        td {padding:8px 12px;border-bottom:1px solid rgba(30,45,61,0.5);font-size:0.9em;}
+        .dir-badge {display:inline-block;padding:6px 20px;border-radius:20px;font-size:1.2em;font-weight:bold;margin:8px 0;}
+        .warn {background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.2);border-radius:12px;padding:20px;margin-bottom:16px;}
+        .warn h2 {color:var(--yellow);margin-bottom:10px;}
+        .event-item {background:var(--card2);border-radius:8px;padding:12px 16px;margin-bottom:8px;border-left:3px solid var(--orange);}
+        .event-item .et {color:var(--orange);font-weight:600;font-size:0.85em;}
+        .event-item .ed {color:var(--sub);font-size:0.85em;margin-top:4px;}
+        .news-item {background:var(--card2);border-radius:8px;padding:12px 16px;margin-bottom:8px;border-left:3px solid var(--blue);}
+        .news-item .nt {font-weight:600;font-size:0.9em;}
+        .news-item .nd {color:var(--sub);font-size:0.85em;margin-top:3px;}
+        .signal-row {display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(30,45,61,0.5);}
+        .signal-dot {width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0;}
+        .foot {text-align:center;color:var(--sub);font-size:0.8em;margin-top:24px;padding-top:16px;border-top:1px solid var(--border);}
+        .foot a {color:var(--purple);text-decoration:none;}
+        @media(max-width:768px){.row3{grid-template-columns:1fr;}.g4{grid-template-columns:repeat(2,1fr);}.hero .price{font-size:2.5em;}}
+    </style>
+</head>
+<body>
+<div class="c">
+
+    <!-- 标题头 -->
+    <div class="h">
+        <div style="font-size:2.2em;margin-bottom:2px;">&#8383;</div>
+        <h1>Crypto Daily Report</h1>
+        <p class="sub">2026年04月16日 | 10:30 UTC+8</p>
+        <p style="color:var(--sub);font-size:0.8em;margin-top:3px;">MK Trading | bitebiwang1413</p>
+        <span class="badge">16 Sections Full Report</span>
+    </div>
+
+    <!-- 1. BTC Hero 价格概览 -->
+    <div class="hero">
+        <div class="sym">BTC / USDT</div>
+        <div class="price">$74,919</div>
+        <div class="chg up">&#9650; +0.90%</div>
+        <div style="margin-top:10px;display:flex;justify-content:center;gap:20px;color:var(--sub);font-size:0.85em;flex-wrap:wrap;">
+            <span>24h高: <span style="color:#22c55e;">$75,206</span></span>
+            <span>24h低: <span style="color:#ef4444;">$73,617</span></span>
+            <span>ATH: $126,080</span>
+            <span>| 距ATH: <span style="color:#ef4444;">-40.6%</span></span>
+        </div>
+    </div>
+
+    <!-- 2. 主流币种行情 -->
+    <div class="s">
+        <div class="sh"><h2>&#128200; 1. 主流币种行情</h2><span class="tag tag-live">LIVE</span></div>
+        <div class="row3">
+            <div class="cd">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+                    <span style="font-size:1.2em;">&#8383;</span>
+                    <span style="font-weight:bold;">Bitcoin</span>
+                    <span style="color:var(--sub);font-size:0.8em;">BTC/USDT</span>
+                </div>
+                <div style="font-size:1.8em;font-weight:bold;margin-bottom:6px;">$74,919</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <span style="background:rgba(34,197,94,0.12);color:#22c55e;padding:2px 8px;border-radius:6px;font-size:0.85em;">+0.90%</span>
+                    <span style="color:var(--sub);font-size:0.8em;">1h: +0.37%</span>
+                    <span style="color:var(--sub);font-size:0.8em;">7d: +5.63%</span>
+                </div>
+                <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:0.8em;">
+                    <div><span style="color:var(--sub);">24h高</span><br><span style="color:#22c55e;">$75,206</span></div>
+                    <div><span style="color:var(--sub);">24h低</span><br><span style="color:#ef4444;">$73,617</span></div>
+                    <div><span style="color:var(--sub);">市值</span><br>$1.50T</div>
+                    <div><span style="color:var(--sub);">24h量</span><br>$39.41B</div>
+                </div>
+            </div>
+            <div class="cd">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+                    <span style="font-size:1.2em;">&#926;</span>
+                    <span style="font-weight:bold;">Ethereum</span>
+                    <span style="color:var(--sub);font-size:0.8em;">ETH/USDT</span>
+                </div>
+                <div style="font-size:1.8em;font-weight:bold;margin-bottom:6px;">$2,361</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <span style="background:rgba(34,197,94,0.12);color:#22c55e;padding:2px 8px;border-radius:6px;font-size:0.85em;">+1.76%</span>
+                    <span style="color:var(--sub);font-size:0.8em;">1h: +0.35%</span>
+                    <span style="color:var(--sub);font-size:0.8em;">7d: +8.08%</span>
+                </div>
+                <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:0.8em;">
+                    <div><span style="color:var(--sub);">24h高</span><br><span style="color:#22c55e;">$2,380</span></div>
+                    <div><span style="color:var(--sub);">24h低</span><br><span style="color:#ef4444;">$2,313</span></div>
+                    <div><span style="color:var(--sub);">市值</span><br>$284.3B</div>
+                    <div><span style="color:var(--sub);">24h量</span><br>$17.05B</div>
+                </div>
+            </div>
+            <div class="cd">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+                    <span style="font-size:1.2em;">&#9733;</span>
+                    <span style="font-weight:bold;">Solana</span>
+                    <span style="color:var(--sub);font-size:0.8em;">SOL/USDT</span>
+                </div>
+                <div style="font-size:1.8em;font-weight:bold;margin-bottom:6px;">$85.10</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <span style="background:rgba(34,197,94,0.12);color:#22c55e;padding:2px 8px;border-radius:6px;font-size:0.85em;">+1.70%</span>
+                    <span style="color:var(--sub);font-size:0.8em;">1h: +0.38%</span>
+                    <span style="color:var(--sub);font-size:0.8em;">7d: +3.48%</span>
+                </div>
+                <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:0.8em;">
+                    <div><span style="color:var(--sub);">24h高</span><br><span style="color:#22c55e;">$85.60</span></div>
+                    <div><span style="color:var(--sub);">24h低</span><br><span style="color:#ef4444;">$82.75</span></div>
+                    <div><span style="color:var(--sub);">市值</span><br>$48.84B</div>
+                    <div><span style="color:var(--sub);">24h量</span><br>$3.61B</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. 24h 价格走势图 -->
+    <div class="s">
+        <div class="sh"><h2>&#128201; 2. BTC 24H 价格走势</h2><span class="tag tag-live">LIVE</span></div>
+        <div style="height:280px;"><canvas id="priceChart"></canvas></div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.8em;color:var(--sub);">
+            <span>24h最低: <span style="color:#ef4444;">$73,680</span></span>
+            <span>当前: <span style="color:var(--text);">$74,919</span></span>
+            <span>24h最高: <span style="color:#22c55e;">$75,010</span></span>
+        </div>
+    </div>
+
+    <!-- 4. 宏观事件 -->
+    <div class="s">
+        <div class="sh"><h2>&#127758; 3. 宏观事件日历</h2><span class="tag tag-macro">MACRO</span></div>
+        <div class="event-item">
+            <div class="et">SEC CLARITY Act 圆桌会议 | 4月16日</div>
+            <div class="ed">决定数字资产在美国法律下的分类。积极结果将消除监管模糊性，可能成为突破$76,016的直接催化剂。为本周最重要单一事件。</div>
+        </div>
+        <div class="event-item">
+            <div class="et">美联储FOMC会议 | 4月29日</div>
+            <div class="ed">预计利率维持3.5%-3.75%不变。市场焦点在鲍威尔关于2026下半年降息路径的前瞻性指引。</div>
+        </div>
+        <div class="event-item">
+            <div class="et">美国-伊朗地缘冲突 | 持续中</div>
+            <div class="ed">冲突进入第6周，BTC/ETH自冲突以来分别+1%/+6%，跑赢标普500（-8%）。地缘溢价仍存。</div>
+        </div>
+        <div class="event-item">
+            <div class="et">BTC与标普500相关性 | 0.94</div>
+            <div class="ed">BTC与标普500的24h相关性高达0.94，确认其高贝塔宏观资产属性。通胀数据和政策信号将持续影响走势。</div>
+        </div>
+    </div>
+
+    <!-- 5. 技术分析 -->
+    <div class="s">
+        <div class="sh"><h2>&#128202; 4. 技术分析</h2><span class="tag tag-tech">TECH</span></div>
+        <div class="g g3" style="margin-bottom:14px;">
+            <div class="sc">
+                <div class="lbl">MA7</div>
+                <div class="val" style="color:#22c55e;">$73,495</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">MA14</div>
+                <div class="val" style="color:#22c55e;">$71,511</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">MA30</div>
+                <div class="val" style="color:#22c55e;">$69,984</div>
+            </div>
+        </div>
+        <div class="g g3" style="margin-bottom:14px;">
+            <div class="sc">
+                <div class="lbl">MFI-14</div>
+                <div class="val" style="color:var(--orange);">79.00</div>
+                <div style="color:var(--sub);font-size:0.75em;margin-top:2px;">接近超买</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">均线排列</div>
+                <div class="val" style="color:#22c55e;font-size:1em;">多头排列</div>
+                <div style="color:var(--sub);font-size:0.75em;margin-top:2px;">MA7>MA14>MA30</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">24h波动率</div>
+                <div class="val" style="color:var(--yellow);font-size:1em;">0.55%</div>
+                <div style="color:var(--sub);font-size:0.75em;margin-top:2px;">极度压缩</div>
+            </div>
+        </div>
+        <div style="background:var(--card2);border-radius:8px;padding:14px;font-size:0.9em;">
+            <p style="margin-bottom:8px;"><strong style="color:var(--orange);">技术结论：</strong>BTC处于变盘边缘。均线全面多头排列，但24h波动率仅0.55%，处于极度压缩状态。MFI-14达79（本轮复苏最高），逼近传统超买阈值80。资金费率微负，暗示潜在逼空动力。关键转折点在$75,396-$76,016。</p>
+        </div>
+    </div>
+
+    <!-- 6. K线形态 -->
+    <div class="s">
+        <div class="sh"><h2>&#128210; 5. K线形态分析</h2><span class="tag tag-tech">TECH</span></div>
+        <div class="g g2">
+            <div style="background:var(--card2);border-radius:8px;padding:14px;">
+                <div style="font-weight:600;margin-bottom:6px;color:var(--orange);">24h走势特征</div>
+                <ul style="padding-left:16px;color:var(--sub);font-size:0.85em;">
+                    <li>亚盘时段（0-8h）：震荡下行，最低探至$73,680</li>
+                    <li>欧盘时段（8-16h）：企稳反弹，V型反转</li>
+                    <li>美盘时段（16-24h）：突破$74,800后回落整固</li>
+                    <li>整体呈"W底"形态，多头在$73,700一线有强支撑</li>
+                </ul>
+            </div>
+            <div style="background:var(--card2);border-radius:8px;padding:14px;">
+                <div style="font-weight:600;margin-bottom:6px;color:var(--orange);">关键形态信号</div>
+                <ul style="padding-left:16px;color:var(--sub);font-size:0.85em;">
+                    <li style="color:#22c55e;">多头排列（MA7>MA14>MA30）持续</li>
+                    <li style="color:var(--yellow);">MFI接近超买，短期可能回调</li>
+                    <li style="color:#22c55e;">资金费率微负，空头付费，逼空潜力</li>
+                    <li style="color:var(--yellow);">波动率极度压缩，大方向选择在即</li>
+                    <li style="color:var(--yellow);">$75,400为多空分水岭</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. 资金费率 -->
+    <div class="s">
+        <div class="sh"><h2>&#128176; 6. 资金费率 (Funding Rate)</h2><span class="tag tag-deriv">DERIVATIVES</span></div>
+        <table>
+            <thead><tr><th>币种</th><th>当前费率</th><th>解读</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight:bold;">BTC</td>
+                    <td style="color:#22c55e;font-weight:bold;">-0.0022%</td>
+                    <td style="color:var(--sub);">微负费率，空头付费做多，潜在逼空动力</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">ETH</td>
+                    <td style="color:#22c55e;font-weight:bold;">-0.0019%</td>
+                    <td style="color:var(--sub);">微负费率，空头略占优，与BTC一致</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">SOL</td>
+                    <td style="color:var(--orange);font-weight:bold;">+0.0100%</td>
+                    <td style="color:var(--sub);">正费率，多头偏热，注意回调风险</td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="margin-top:10px;color:var(--sub);font-size:0.8em;">* BTC/ETH资金费率为负属于少见信号，通常暗示短期反弹概率较高</div>
+    </div>
+
+    <!-- 8. 合约数据（持仓量+多空比） -->
+    <div class="s">
+        <div class="sh"><h2>&#128203; 7. 合约数据总览</h2><span class="tag tag-deriv">DERIVATIVES</span></div>
+        <div style="margin-bottom:14px;">
+            <h3 style="font-size:0.95em;margin-bottom:8px;color:var(--sub);">多空比 (Long/Short Ratio)</h3>
+            <table>
+                <thead><tr><th>币种</th><th>多头占比</th><th>空头占比</th><th>多空比</th><th>状态</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight:bold;">BTC</td>
+                        <td style="color:#ef4444;">43.11%</td>
+                        <td style="color:#22c55e;">56.89%</td>
+                        <td>0.7578</td>
+                        <td style="color:var(--yellow);">空头略优</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold;">ETH</td>
+                        <td style="color:#22c55e;">56.67%</td>
+                        <td style="color:#ef4444;">43.33%</td>
+                        <td>1.3079</td>
+                        <td style="color:var(--yellow);">多头偏多</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold;">SOL</td>
+                        <td style="color:#22c55e;">69.73%</td>
+                        <td style="color:#ef4444;">30.27%</td>
+                        <td style="color:var(--red);">2.3036</td>
+                        <td style="color:var(--red);">多头过热</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3 style="font-size:0.95em;margin-bottom:8px;color:var(--sub);">爆仓数据 (24H)</h3>
+            <div style="background:var(--card2);border-radius:8px;padding:14px;text-align:center;color:var(--sub);font-size:0.9em;">
+                Binance实时爆仓接口暂无新数据，建议参考CoinGlass等第三方平台获取完整24h爆仓统计。
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. 矿工动态 -->
+    <div class="s">
+        <div class="sh"><h2>&#9874;&#65039; 8. 矿工动态</h2><span class="tag tag-chain">ON-CHAIN</span></div>
+        <div class="g g3" style="margin-bottom:14px;">
+            <div class="sc">
+                <div class="lbl">当前算力</div>
+                <div class="val" style="font-size:1.1em;">~1,020 EH/s</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">算力价格</div>
+                <div class="val" style="color:var(--red);font-size:1.1em;">$30-35/PH/day</div>
+                <div style="color:var(--sub);font-size:0.7em;margin-top:2px;">历史低位</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">亏损矿机占比</div>
+                <div class="val" style="color:var(--red);">15-20%</div>
+            </div>
+        </div>
+        <div style="background:var(--card2);border-radius:8px;padding:14px;font-size:0.85em;color:var(--sub);">
+            <p style="margin-bottom:6px;"><strong style="color:var(--orange);">Q1 2026矿工报告摘要：</strong></p>
+            <ul style="padding-left:16px;">
+                <li>加权平均挖矿现金成本约$79,995/BTC，当前价格仍低于成本线</li>
+                <li>上市矿企合计从峰值减持超15,000 BTC（矿工投降持续）</li>
+                <li>Core Scientific 1月抛售~1,900 BTC，Bitdeer持仓已清零</li>
+                <li>矿企加速AI/HPC转型，累计AI合同超$700亿</li>
+                <li>硬件迭代：S23系列/SEALMINER A3（<10 J/TH）预计H1大规模部署</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 10. 链上指标 -->
+    <div class="s">
+        <div class="sh"><h2>&#128279; 9. 链上指标</h2><span class="tag tag-chain">ON-CHAIN</span></div>
+        <div class="g g3" style="margin-bottom:14px;">
+            <div class="sc">
+                <div class="lbl">流通供应量</div>
+                <div class="val" style="font-size:1em;">20,016,393 BTC</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">总供应量</div>
+                <div class="val" style="font-size:1em;">21,000,000 BTC</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">已开采比例</div>
+                <div class="val" style="color:var(--orange);">95.3%</div>
+            </div>
+        </div>
+        <div style="background:var(--card2);border-radius:8px;padding:14px;font-size:0.85em;color:var(--sub);">
+            <ul style="padding-left:16px;">
+                <li>减半后区块奖励降至3.125 BTC，每日新增产出约450 BTC（较减半前减半）</li>
+                <li>矿工持续减持（投降），但机构ETF需求形成强劲对冲</li>
+                <li>长期持有者（LTH）供应比相对稳定，未出现大规模派发信号</li>
+                <li>交易所BTC余额持续下降，暗示长期积累趋势仍在</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 11. ETF资金流 -->
+    <div class="s">
+        <div class="sh"><h2>&#128200; 10. BTC ETF 资金流向</h2><span class="tag tag-macro">INSTITUTIONAL</span></div>
+        <div class="g g3" style="margin-bottom:14px;">
+            <div class="sc">
+                <div class="lbl">最近一日 (4/15)</div>
+                <div class="val" style="color:#ef4444;">-$23.5M</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">7日累计</div>
+                <div class="val" style="color:#22c55e;">+$559M</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">7日净流入天数</div>
+                <div class="val">3/7</div>
+            </div>
+        </div>
+        <table>
+            <thead><tr><th>日期</th><th>净流入</th><th>主要流入</th><th>主要流出</th></tr></thead>
+            <tbody>
+                <tr><td>4/15</td><td style="color:#ef4444;">-$23.5M</td><td>MINIBTC: +$19M</td><td>FBTC: -$47M, ARKB: -$42M</td></tr>
+                <tr><td>4/14</td><td style="color:var(--sub);">$0</td><td>IBIT: +$213M, ARKB: +$113M</td><td>-</td></tr>
+                <tr><td>4/13</td><td style="color:#22c55e;">+$245M</td><td>ARKB: +$139M, BITB: +$79M</td><td>-</td></tr>
+                <tr><td>4/10</td><td style="color:#22c55e;">+$238M</td><td>FBTC: +$136M</td><td>-</td></tr>
+                <tr><td>4/9</td><td style="color:#22c55e;">+$358M</td><td>FBTC: +$269M</td><td>-</td></tr>
+                <tr><td>4/8</td><td style="color:#ef4444;">-$93M</td><td>FBTC: +$40M</td><td>ARKB: -$78M</td></tr>
+                <tr><td>4/7</td><td style="color:#ef4444;">-$166M</td><td>-</td><td>ARKB: -$50M</td></tr>
+                <tr><td>4/6</td><td style="color:#22c55e;">+$488M</td><td>FBTC: +$189M, ARKB: +$152M</td><td>-</td></tr>
+            </tbody>
+        </table>
+        <div style="margin-top:10px;font-size:0.8em;color:var(--sub);">累计净流入达$56.51B（截至4月10日），距抹平2026年全部流出仅差$80M。贝莱德IBIT管理资产达$540亿。</div>
+    </div>
+
+    <!-- 12. 机构动态 -->
+    <div class="s">
+        <div class="sh"><h2>&#127970; 11. 机构动态</h2><span class="tag tag-macro">INSTITUTIONAL</span></div>
+        <div class="news-item">
+            <div class="nt">贝莱德IBIT持续增持</div>
+            <div class="nd">管理资产达$540亿，4月14日单日流入$213M，机构平均买入价约$89K（目前浮亏），但长线信念未变。</div>
+        </div>
+        <div class="news-item">
+            <div class="nt">2026 Q1全球加密ETP净流入$187亿</div>
+            <div class="nd">其中BTC ETF独占$124亿。尽管BTC距1月高点下跌约25%，机构仍在持续积累。</div>
+        </div>
+        <div class="news-item">
+            <div class="nt">矿企AI转型加速</div>
+            <div class="nd">Core Scientific签$102亿CoreWeave合同（12年），WULF扩展至2.9GW。矿企AI收入占比预计年底达70%。</div>
+        </div>
+    </div>
+
+    <!-- 13. 恐慌贪婪指数 -->
+    <div class="s">
+        <div class="sh"><h2>&#128128; 12. 恐慌贪婪指数</h2><span class="tag tag-macro">SENTIMENT</span></div>
+        <div style="text-align:center;padding:20px;">
+            <div style="position:relative;width:200px;height:200px;margin:0 auto;">
+                <svg viewBox="0 0 200 200" style="width:100%;height:100%;transform:rotate(-90deg);">
+                    <circle cx="100" cy="100" r="85" fill="none" stroke="#1e2d3d" stroke-width="16"/>
+                    <circle cx="100" cy="100" r="85" fill="none" stroke="#ef4444" stroke-width="16"
+                            stroke-dasharray="534" stroke-dashoffset="411" stroke-linecap="round"/>
+                </svg>
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+                    <div style="font-size:3em;font-weight:bold;color:#ef4444;">23</div>
+                    <div style="color:var(--sub);font-size:0.9em;">/ 100</div>
+                </div>
+            </div>
+            <div style="margin-top:16px;">
+                <span style="background:rgba(239,68,68,0.15);color:#ef4444;padding:6px 20px;border-radius:20px;font-size:1.1em;font-weight:600;border:1px solid rgba(239,68,68,0.3);">
+                    Extreme Fear | 极度恐慌
+                </span>
+            </div>
+            <div style="margin-top:12px;color:var(--sub);font-size:0.85em;max-width:500px;margin-left:auto;margin-right:auto;">
+                恐惧贪婪指数降至23，为60日来最低区间。4月2日曾触及8（2022年熊市以来最低），由美伊冲突、关税冲击、Drift协议漏洞三重冲击引发。当前极度恐慌环境往往对应中期底部区域。
+            </div>
+        </div>
+    </div>
+
+    <!-- 14. 阻力支撑位 -->
+    <div class="s">
+        <div class="sh"><h2>&#127919; 13. 关键阻力/支撑位</h2><span class="tag tag-tech">TECH</span></div>
+        <div class="g g4" style="margin-bottom:14px;">
+            <div class="sc">
+                <div class="lbl">阻力位 R2</div>
+                <div class="val" style="color:#ef4444;">$76,886</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">阻力位 R1</div>
+                <div class="val" style="color:#ef4444;">$75,761</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">支撑位 S1</div>
+                <div class="val" style="color:#22c55e;">$72,943</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">支撑位 S2</div>
+                <div class="val" style="color:#22c55e;">$71,838</div>
+            </div>
+        </div>
+        <div style="background:var(--card2);border-radius:8px;padding:14px;font-size:0.85em;color:var(--sub);">
+            <p style="margin-bottom:6px;"><strong style="color:var(--orange);">技术关键位（Phemex分析）：</strong></p>
+            <ul style="padding-left:16px;">
+                <li><span style="color:#ef4444;">$75,396</span> - 当日盘中高点，即时突破天花板</li>
+                <li><span style="color:#ef4444;">$75,999-$76,016</span> - 多日阻力区，日线收盘站上方则趋势反转为确认信号</li>
+                <li><span style="color:#22c55e;">$73,492</span> - MA7首道需求区</li>
+                <li><span style="color:#22c55e;">$71,780</span> - 38.2%斐波那契回撤位</li>
+                <li><span style="color:#22c55e;">$70,000-$71,511</span> - MA14汇聚区及数周震荡底部</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 15. 交易信号 -->
+    <div class="s" style="border-left:3px solid #eab308;">
+        <div class="sh">
+            <h2>&#128161; 14. 交易信号与方向建议</h2>
+            <span class="dir-badge" style="background:rgba(234,179,8,0.12);color:#eab308;border:1px solid rgba(234,179,8,0.3);">
+                观望偏多
+            </span>
+        </div>
+        <div style="margin-bottom:14px;padding:12px;background:var(--card2);border-radius:8px;">
+            <p style="font-weight:600;color:var(--yellow);margin-bottom:6px;">综合评分：+1.5 | 轻多</p>
+            <p style="color:var(--sub);font-size:0.9em;">多空信号偏多但力度有限，建议轻仓试多，严格止损。变盘窗口在即，需等待$75,400方向性突破确认。</p>
+        </div>
+        <div class="signal-row">
+            <div class="signal-dot" style="background:#22c55e;"></div>
+            <div>
+                <span style="color:#22c55e;font-weight:600;">[看多]</span>
+                <span style="color:var(--sub);"> BTC资金费率-0.0022%为负，空头付费做多，逼空潜力显著</span>
+            </div>
+        </div>
+        <div class="signal-row">
+            <div class="signal-dot" style="background:#22c55e;"></div>
+            <div>
+                <span style="color:#22c55e;font-weight:600;">[看多]</span>
+                <span style="color:var(--sub);">BTC多空比0.76偏低，空头拥挤，存在轧空机会</span>
+            </div>
+        </div>
+        <div class="signal-row">
+            <div class="signal-dot" style="background:#eab308;"></div>
+            <div>
+                <span style="color:#eab308;font-weight:600;">[中性]</span>
+                <span style="color:var(--sub);">24h波动+0.90%，处于震荡区间，方向不明</span>
+            </div>
+        </div>
+        <div class="signal-row">
+            <div class="signal-dot" style="background:#eab308;"></div>
+            <div>
+                <span style="color:#eab308;font-weight:600;">[中性]</span>
+                <span style="color:var(--sub);">波动率极度压缩（0.55%），变盘在即但方向待确认</span>
+            </div>
+        </div>
+        <div class="signal-row">
+            <div class="signal-dot" style="background:#ef4444;"></div>
+            <div>
+                <span style="color:#ef4444;font-weight:600;">[看空]</span>
+                <span style="color:var(--sub);">MFI-14达79接近超买，短期存在技术性回调压力</span>
+            </div>
+        </div>
+        <div class="signal-row">
+            <div class="signal-dot" style="background:#ef4444;"></div>
+            <div>
+                <span style="color:#ef4444;font-weight:600;">[看空]</span>
+                <span style="color:var(--sub);">恐惧贪婪指数23极度恐慌，反映市场信心不足</span>
+            </div>
+        </div>
+        <div style="margin-top:14px;background:var(--card2);border-radius:8px;padding:14px;font-size:0.85em;">
+            <p style="font-weight:600;color:var(--orange);margin-bottom:6px;">三种情境预测：</p>
+            <p style="color:var(--sub);margin-bottom:4px;"><strong style="color:#22c55e;">看涨：</strong>SEC CLARITY Act利好 + 放量突破$75,400，目标$77,600-$80,600（10-14天）</p>
+            <p style="color:var(--sub);margin-bottom:4px;"><strong style="color:#eab308;">基准：</strong>$73,500-$75,400区间横盘至FOMC（4/29），鸽派催化下目标$76,000-$78,000</p>
+            <p style="color:var(--sub);"><strong style="color:#ef4444;">看跌：</strong>$75,400遇阻回落，MFI回落，测试$71,780。若破$70,000可能考验$62,872</p>
+        </div>
+    </div>
+
+    <!-- 16. 风险提示 + 免责声明 -->
+    <div class="warn">
+        <h2>&#9888;&#65039; 15. 风险提示</h2>
+        <ul style="padding-left:18px;color:var(--sub);font-size:0.85em;">
+            <li style="margin-bottom:4px;">加密货币市场7x24运行，波动性极高，杠杆交易风险加倍</li>
+            <li style="margin-bottom:4px;">当前恐惧贪婪指数处于极度恐慌区间（23），市场情绪脆弱，可能出现极端波动</li>
+            <li style="margin-bottom:4px;">合约交易存在强制平仓风险，请严格控制仓位和杠杆倍数</li>
+            <li style="margin-bottom:4px;">美伊地缘冲突持续，任何突发事件可能导致剧烈价格波动</li>
+            <li style="margin-bottom:4px;">SEC监管政策不确定性仍存，重大政策变化可能引发市场震荡</li>
+            <li>资金费率、多空比等衍生品数据仅供参考，不构成交易信号</li>
+        </ul>
+    </div>
+
+    <div class="warn" style="border-color:var(--border);background:var(--card);">
+        <h2 style="color:var(--sub);font-size:1em;">&#128196; 16. 免责声明</h2>
+        <p style="color:var(--sub);font-size:0.8em;line-height:1.8;">
+            本报告由自动化系统生成，所引用数据来源于 CoinGecko、Binance、CoinGlass、Alternative.me、Phemex 等公开平台。
+            报告中的所有分析、建议和预测仅供参考，不构成任何投资建议、交易建议或财务建议。
+            加密货币投资存在高度风险，价格可能在短时间内大幅波动，导致全部投资损失。
+            投资者应根据自身风险承受能力、财务状况和投资目标独立做出决策。
+            过往表现不代表未来结果。在做出任何投资决定前，建议咨询持牌金融顾问。
+            DYOR - 请自行研究后决策，理性交易。
+        </p>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="foot">
+        <p>数据来源: CoinGecko | Binance | CoinGlass | Alternative.me | Phemex</p>
+        <p>自动生成于 2026年04月16日 10:30 UTC+8 | MK Trading</p>
+        <p style="margin-top:6px;">
+            <a href="https://t.me/bitebiwang1413">Telegram</a> &middot;
+            <a href="https://twitter.com/bitebiwang1413">Twitter</a> &middot;
+            <a href="https://wanglin141319-bit.github.io/btc/">GitHub Pages</a>
+        </p>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+(function(){
+    var labels = ['10:28','11:01','11:34','12:08','12:41','13:14','13:48','14:21','14:54','15:28','16:01','16:34','17:08','17:41','18:14','18:48','19:21','19:54','20:28','21:01','21:34','22:08','22:41','23:14','23:48','00:21','00:54','01:28','02:01','02:34','03:08','03:41','04:14','04:48','05:21','05:54','06:28','07:01','07:34','08:08','08:41','09:14','09:48','10:21','10:54','11:28','12:01'];
+    var prices = [74252.60,74278.92,74332.58,74435.95,74300.57,74418.85,73995.25,74001.36,73973.02,73941.81,73679.93,73738.25,74044.38,74080.83,73999.72,74062.24,73847.48,74028.80,74045.40,74203.30,74207.11,74292.60,74258.86,74003.57,74358.24,74209.84,73703.46,73945.99,74046.83,74031.21,74122.87,74204.52,74292.29,74470.35,74885.54,74904.08,74806.45,74826.84,74604.03,74950.54,75010.39,74802.36,74743.39,74760.03,74828.34,74707.87,74645.33,74700.29];
+    if(prices.length>0){
+        var ctx=document.getElementById('priceChart').getContext('2d');
+        var isUp=prices[0]<=prices[prices.length-1];
+        new Chart(ctx,{
+            type:'line',
+            data:{
+                labels:labels,
+                datasets:[{
+                    label:'BTC/USDT',
+                    data:prices,
+                    borderColor:isUp?'#22c55e':'#ef4444',
+                    backgroundColor:isUp?'rgba(34,197,94,0.08)':'rgba(239,68,68,0.08)',
+                    fill:true,
+                    tension:0.35,
+                    pointRadius:0,
+                    pointHoverRadius:5,
+                    borderWidth:2
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false,
+                interaction:{intersect:false,mode:'index'},
+                plugins:{legend:{display:false},tooltip:{
+                    backgroundColor:'#1a2332',
+                    titleColor:'#e2e8f0',
+                    bodyColor:'#22c55e',
+                    borderColor:'#1e2d3d',
+                    borderWidth:1,
+                    callbacks:{label:function(ctx){return '$'+ctx.parsed.y.toLocaleString('en-US',{minimumFractionDigits:2});}}
+                }},
+                scales:{
+                    x:{grid:{color:'rgba(255,255,255,0.03)'},ticks:{color:'#64748b',maxRotation:0,maxTicksLimit:12,font:{size:10}}},
+                    y:{grid:{color:'rgba(255,255,255,0.03)'},ticks:{color:'#64748b',callback:function(v){return '$'+v/1000+'K';},font:{size:10}}}
+                }
+            }
+        });
+    }
+})();
+</script>
+</body>
+</html>
