@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTC 每日合约分析日报 · {{TODAY_DISPLAY}}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#080d14;--card:#0f1a27;--card2:#162032;--border:#1e2d40;--text:#e2e8f0;--muted:#64748b;--green:#00d4aa;--red:#ff4757;--yellow:#fbbf24;--blue:#3b82f6;--purple:#8b5cf6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:24px 16px}
+/* Header */
+.header{background:linear-gradient(135deg,rgba(0,212,170,.07),rgba(59,130,246,.07));border:1px solid var(--border);border-radius:16px;padding:32px 24px;text-align:center;margin-bottom:24px}
+.header h1{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .date{color:var(--muted);font-size:14px;margin-top:6px}
+.header .update{color:var(--muted);font-size:12px;margin-top:4px;font-family:monospace}
+/* Cards */
+.section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px}
+.section-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.badge-good{background:rgba(0,212,170,.15);color:var(--green);padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700}
+.badge-warn{background:rgba(251,191,36,.15);color:var(--yellow);padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700}
+.badge-bad{background:rgba(255,71,87,.15);color:var(--red);padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700}
+/* Price grid */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
+.price-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+.price-card .coin{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.price-card .val{font-size:26px;font-weight:800}
+.price-card .chg{font-size:14px;font-weight:600}
+.price-card .sub{font-size:11px;color:var(--muted);margin-top:4px}
+.up{color:var(--green)}.dn{color:var(--red)}
+/* Indicators */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.ind-cell{background:var(--card2);border-radius:10px;padding:16px;text-align:center;border:1px solid var(--border)}
+.ind-name{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.ind-val{font-size:22px;font-weight:800}
+.ind-sub{font-size:11px;color:var(--muted);margin-top:4px}
+/* Strategy card */
+.strategy-card{background:linear-gradient(135deg,rgba(0,212,170,.06),rgba(59,130,246,.06));border:1px solid rgba(0,212,170,.25);border-radius:14px;padding:28px}
+.dir-badge{padding:6px 20px;border-radius:20px;font-size:15px;font-weight:800;display:inline-block;margin-bottom:16px}
+.dir-long{background:rgba(0,212,170,.2);color:var(--green)}.dir-short{background:rgba(255,71,87,.2);color:var(--red)}.dir-wait{background:rgba(251,191,36,.2);color:var(--yellow)}
+.conf-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px}
+.conf-bg{height:8px;background:var(--card2);border-radius:4px;overflow:hidden}
+.conf-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--yellow),var(--green));transition:width 1s ease}
+.price-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.price-chip{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;flex:1;min-width:100px}
+.price-chip .lbl{font-size:10px;color:var(--muted);text-transform:uppercase}
+.price-chip .val{font-size:18px;font-weight:800;margin-top:2px}
+.signals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.sig-block{background:var(--card2);border-radius:8px;padding:12px}
+.sig-title{font-size:11px;color:var(--muted);margin-bottom:6px}
+.sig-bull{color:var(--green);font-size:12px;line-height:1.8}
+.sig-bear{color:var(--red);font-size:12px;line-height:1.8}
+/* TD Sequential 面板 */
+.td-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.td-card{background:var(--card2);border-radius:8px;padding:10px 12px;border-left:3px solid var(--border)}
+.td-card.buy{border-left-color:#00d4aa}
+.td-card.sell{border-left-color:#ff4757}
+.td-card.neutral{border-left-color:#fbbf24}
+.td-timeframe{font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;font-weight:700}
+.td-status{font-size:12px;font-weight:700;margin-bottom:3px}
+.td-status.buy{color:#00d4aa}
+.td-status.sell{color:#ff4757}
+.td-status.neutral{color:#fbbf24}
+.td-count{font-size:11px;color:var(--muted)}
+.td-hint{font-size:10px;color:var(--muted);margin-top:3px;font-style:italic}
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.stat-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+.stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.stat-value{font-size:24px;font-weight:800}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:4px}
+/* Tracking table */
+.table-scroll{overflow-x:auto}
+.tracking-table{width:100%;border-collapse:collapse;font-size:12px;min-width:700px}
+.tracking-table th{background:var(--card2);padding:10px 8px;text-align:left;border-bottom:2px solid var(--border);color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+.tracking-table td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tracking-table tr:hover td{background:rgba(255,255,255,.02)}
+.tracking-table .today-row td{background:rgba(251,191,36,.06)}
+.tracking-table .dir-long{color:var(--green);font-weight:700}
+.tracking-table .dir-short{color:var(--red);font-weight:700}
+.tracking-table .dir-neutral{color:var(--yellow);font-weight:700}
+.tracking-table .result-win,.result-win_tp1{color:var(--green);font-weight:700;background:rgba(0,212,170,.1);padding:2px 8px;border-radius:4px;display:inline-block}
+.tracking-table .result-loss{color:var(--red);font-weight:700;background:rgba(255,71,87,.1);padding:2px 8px;border-radius:4px;display:inline-block}
+.tracking-table .result-break_even,.result-open,.result-skip{color:var(--yellow);font-weight:700;background:rgba(251,191,36,.1);padding:2px 8px;border-radius:4px;display:inline-block}
+.tracking-table .resolve-note{font-size:11px;color:var(--muted);max-width:180px}
+.badge-today{background:var(--yellow);color:#000;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:800;margin-left:6px}
+/* Table footer summary */
+.table-summary{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-top:12px;display:flex;gap:24px;flex-wrap:wrap;font-size:13px;font-weight:700}
+.sum-item{display:flex;align-items:center;gap:6px}
+.sum-green{color:var(--green)}.sum-red{color:var(--red)}.sum-gray{color:var(--muted)}.sum-blue{color:var(--blue)}.sum-yellow{color:var(--yellow)}
+/* Error stats */
+.error-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.error-item{display:flex;align-items:center;gap:12px}
+.error-label{min-width:90px;font-size:13px}
+.error-bar-bg{flex:1;height:10px;background:var(--card2);border-radius:5px;overflow:hidden}
+.error-bar-fill{height:100%;border-radius:5px;transition:width 1s ease}
+.error-count{min-width:50px;font-size:12px;font-weight:700;text-align:right}
+.improvement-tip{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:10px;padding:16px;margin-top:16px}
+.tip-title{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--blue)}
+.tip-list{list-style:none;padding:0}
+.tip-list li{font-size:12px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)}
+.tip-list li:last-child{border-bottom:none}
+/* Charts */
+.bar-chart-wrap,.line-chart-wrap{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+/* Yesterday review */
+.yesterday-review{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:20px}
+.review-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.review-date{font-size:14px;font-weight:700}
+.result-badge{padding:4px 14px;border-radius:12px;font-size:13px;font-weight:700}
+.rb-win,.rb-win_tp1{background:rgba(0,212,170,.15);color:var(--green)}
+.rb-loss{background:rgba(255,71,87,.15);color:var(--red)}
+.rb-break_even,.rb-skip,.rb-open{background:rgba(251,191,36,.15);color:var(--yellow)}
+.rb-wait{background:rgba(100,116,139,.15);color:var(--muted)}
+.review-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:16px}
+.review-item{background:var(--bg);border-radius:8px;padding:10px 12px}
+.review-label{font-size:10px;color:var(--muted);text-transform:uppercase}
+.review-item>span:last-child{font-size:14px;font-weight:700;display:block;margin-top:2px}
+.review-footer{margin-top:12px}
+.review-detail{font-size:12px;color:var(--muted);margin-top:8px}
+.review-detail strong{color:var(--text)}
+.review-detail .win-color{color:var(--green)}.review-detail .loss-color{color:var(--red)}.review-detail .neutral-color{color:var(--yellow)}
+.score-section{border-top:1px solid var(--border);padding-top:12px;margin-top:12px}
+.score-label{font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.score-bar-bg{height:8px;background:var(--card);border-radius:4px;overflow:hidden;margin-bottom:4px}
+.score-bar-fill{height:100%;border-radius:4px}
+.score-value{font-size:12px;font-weight:700;text-align:right}
+.score-stars{font-size:16px;margin-top:4px}
+/* Week */
+.week-review{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:20px}
+.wr-stats{display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.wr-stat{display:flex;align-items:baseline;gap:4px}
+.wr-num{font-size:24px;font-weight:800}.wr-label{font-size:12px;color:var(--muted)}
+.wr-detail{display:flex;gap:16px;font-size:12px;flex-wrap:wrap}
+.wr-best{color:var(--green)}.wr-worst{color:var(--red)}.wr-muted{color:var(--muted)}
+.week-improvement{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:10px;padding:12px 16px;margin-top:12px}
+.wi-title{font-size:12px;font-weight:700;color:var(--blue);margin-bottom:6px}
+.wi-content{font-size:12px;color:var(--muted)}
+/* Month */
+.month-review{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:24px}
+.mr-title{font-size:15px;font-weight:800;margin-bottom:16px;color:var(--blue)}
+.mr-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.mr-stat{background:var(--bg);border-radius:10px;padding:16px;text-align:center}
+.mr-label{font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
+.mr-value{font-size:22px;font-weight:800;margin-bottom:6px}
+.mr-badge{font-size:11px;padding:2px 8px;border-radius:6px;display:inline-block}
+.mb-good{background:rgba(0,212,170,.15);color:var(--green)}
+.mb-warn{background:rgba(251,191,36,.15);color:var(--yellow)}
+.mb-bad{background:rgba(255,71,87,.15);color:var(--red)}
+.footer{text-align:center;padding:20px;color:var(--muted);font-size:11px}
+.footer a{color:var(--blue);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>BTC 每日合约分析日报</h1>
+  <div class="date">{{TODAY_DISPLAY}}</div>
+  <div class="update">自动生成 · 策略有风险 · 仅供参考</div>
+</div>
+
+<!-- PRICE BOARD (static, not a placeholder) -->
+<div class="section">
+  <div class="section-title">📊 综合行情看板</div>
+  <div class="price-grid">
+    <div class="price-card"><div class="coin">BTC 比特币</div><div class="val">{{BTC_PRICE}}</div><div class="chg" style="color:{{BTC_CHANGE_CLR}}">{{BTC_CHANGE}}</div><div class="sub">CoinGecko 实时</div></div>
+    <div class="price-card"><div class="coin">ETH 以太坊</div><div class="val">{{ETH_PRICE}}</div><div class="chg" style="color:{{ETH_CHANGE_CLR}}">{{ETH_CHANGE}}</div><div class="sub">CoinGecko 实时</div></div>
+    <div class="price-card"><div class="coin">24h 高点</div><div class="val up">{{HIGH_24H}}</div><div class="sub">日线最高</div></div>
+    <div class="price-card"><div class="coin">24h 低点</div><div class="val dn">{{LOW_24H}}</div><div class="sub">日线最低</div></div>
+    <div class="price-card"><div class="coin">RSI 14</div><div class="val">{{RSI}}</div><div class="sub">4H 周期</div></div>
+    <div class="price-card"><div class="coin">资金费率</div><div class="val" style="color:{{FUNDING_CLR}}">{{FUNDING_RATE}}</div><div class="sub">Binance 永续</div></div>
+  </div>
+</div>
+
+<!-- TECHNICAL INDICATORS (static) -->
+<div class="section">
+  <div class="section-title">📈 技术指标</div>
+  <div class="ind-grid">
+    <div class="ind-cell"><div class="ind-name">EMA20</div><div class="ind-val">{{EMA20}}</div><div class="ind-sub">4H 均线</div></div>
+    <div class="ind-cell"><div class="ind-name">EMA50</div><div class="ind-val">{{EMA50}}</div><div class="ind-sub">4H 均线</div></div>
+    <div class="ind-cell"><div class="ind-name">布林上轨</div><div class="ind-val" style="color:var(--red)">{{BB_UPPER}}</div><div class="ind-sub">4H ±2σ</div></div>
+    <div class="ind-cell"><div class="ind-name">布林下轨</div><div class="ind-val" style="color:var(--green)">{{BB_LOWER}}</div><div class="ind-sub">4H ±2σ</div></div>
+    <div class="ind-cell"><div class="ind-name">MACD 柱</div><div class="ind-val" style="color:{{MACD_CLR}}">{{MACD_HIST}}</div><div class="ind-sub">4H 柱状</div></div>
+    <div class="ind-cell"><div class="ind-name">持仓量 OI</div><div class="ind-val">{{OI}}</div><div class="ind-sub">Binance 合约</div></div>
+  </div>
+</div>
+
+<!-- TODAY STRATEGY (static) -->
+<div class="section">
+  <div class="section-title">🎯 今日策略信号</div>
+  <div class="strategy-card">
+    <span class="dir-badge" style="background:{{DIR_COLOR}}25;color:{{DIR_COLOR}}">{{STRATEGY_DIR}}</span>
+    <div class="conf-label"><span>置信度</span><span>{{CONF}}%</span></div>
+    <div class="conf-bg"><div class="conf-fill" style="width:{{CONF}}%"></div></div>
+    <div class="price-row">
+      <div class="price-chip"><div class="lbl">进场区间</div><div class="val">{{ENTRY_RANGE}}</div></div>
+      <div class="price-chip"><div class="lbl">止损 SL</div><div class="val" style="color:var(--red)">{{SL}}</div></div>
+      <div class="price-chip"><div class="lbl">TP1</div><div class="val" style="color:var(--green)">{{TP1}}</div></div>
+      <div class="price-chip"><div class="lbl">TP2</div><div class="val" style="color:var(--green)">{{TP2}}</div></div>
+      <div class="price-chip"><div class="lbl">盈亏比</div><div class="val">{{RR}}</div></div>
+    </div>
+    <div class="signals">
+      <div class="sig-block"><div class="sig-title">✅ 看多信号</div><div class="sig-bull">{{BULL_SIGNALS}}</div></div>
+      <div class="sig-block"><div class="sig-title">❌ 看空信号</div><div class="sig-bear">{{BEAR_SIGNALS}}</div></div>
+    </div>
+    <!-- TD Sequential 多时间框架信号板 -->
+    <div style="margin-top:14px">
+      <div class="sig-title" style="margin-bottom:8px">📊 TD Sequential 信号（买入/卖出时间级别）</div>
+      <div class="td-panel">{{TD_SIGNALS}}</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: 综合统计看板 -->
+<!-- {{SECTION1_STATS}} -->
+
+<!-- SECTION 7: 近14天策略追踪表 -->
+<!-- {{SECTION7_TRACKING}} -->
+
+<!-- SECTION 8: 错误分类统计 -->
+<!-- {{SECTION8_ERROR_STATS}} -->
+
+<!-- SECTION 9: 14天胜率柱状图 -->
+<!-- {{SECTION9_BARS}} -->
+
+<!-- SECTION 10: 累计胜率折线图 -->
+<!-- {{SECTION10_LINE}} -->
+
+<!-- SECTION 11: 昨日复盘 -->
+<!-- {{SECTION11_YESTERDAY_REVIEW}} -->
+
+<!-- SECTION 12: 本周复盘 -->
+<!-- {{SECTION12_WEEK_REVIEW}} -->
+
+<!-- SECTION 13: 月回顾统计 -->
+<!-- {{SECTION13_MONTH_REVIEW}} -->
+
+<!-- FOOTER -->
+<div class="footer">
+  数据来源：CoinGecko · Binance · 自动生成<br>
+  策略有风险，投资需谨慎 · 仅供参考，不构成投资建议<br>
+  <a href="https://wanglin141319-bit.github.io/btc/">wanglin141319-bit.github.io/btc</a>
+</div>
+
+</div><!-- /container -->
+</body>
+</html>
