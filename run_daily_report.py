@@ -1064,7 +1064,15 @@ def generate_html(data, strategy, history, prev_strat, date_display_tuple):
         elif td.get('sell_count', 0) >= 6:
             cls, status, hint = 'neutral', 'TD卖出分布中', f'count={td["sell_count"]}/9 | 等待结构完成'
         else:
-            cls, status, hint = 'neutral', '中性', f'count={td.get("buy_count",0)}/{td.get("sell_count",0)}/9 | 无明显结构'
+            bc = td.get('buy_count', 0)
+            sc = td.get('sell_count', 0)
+            if bc > 0:
+                hint = f'count={bc}/9 | 无明显结构，观望'
+            elif sc > 0:
+                hint = f'count={sc}/9 | 无明显结构，观望'
+            else:
+                hint = '无信号 | 等待结构形成'
+            cls, status = 'neutral', '中性'
         return f'''<div class="td-card {cls}">
   <div class="td-timeframe">{tf_label}</div>
   <div class="td-status {cls}">{status}</div>
