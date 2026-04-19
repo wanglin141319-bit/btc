@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH 每日日报 2026-04-19</title>
+    <style>
+        :root {--bg:#0d0d14;--card:#161b22;--card-h:#1c2128;--border:#30363d;--text:#e6edf3;--sub:#8b949e;--purple:#a855f7;--orange:#f7931a;--green:#3fb950;--red:#f85149;--yellow:#d29922;--eth:#627eea;}
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:20px;}
+        .c {max-width:1400px;margin:0 auto;}
+        .h {background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid var(--purple);border-radius:16px;padding:30px;margin-bottom:24px;text-align:center;}
+        .h h1 {font-size:2.2em;color:var(--eth);margin-bottom:8px;}
+        .h .sub {color:var(--sub);font-size:1.1em;}
+        .s {background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px;position:relative;padding-left:32px;}
+        .s::before {content:'';position:absolute;left:12px;top:0;bottom:0;width:4px;background:var(--purple);border-radius:4px;}
+        .sh {display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+        .sh h2 {font-size:1.3em;}
+        .tag {background:var(--purple);color:white;padding:2px 8px;border-radius:4px;font-size:0.75em;font-weight:bold;}
+        .g {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;}
+        .sc {background:var(--card-h);border-radius:8px;padding:16px;text-align:center;}
+        .sc .lbl {color:var(--sub);font-size:0.85em;margin-bottom:4px;}
+        .sc .val {font-size:1.5em;font-weight:bold;}
+        .hero {background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;text-align:center;margin-bottom:24px;}
+        .hero .sym {color:var(--eth);font-size:1.2em;margin-bottom:8px;}
+        .hero .price {font-size:4em;font-weight:bold;margin-bottom:8px;}
+        .hero .chg {font-size:1.5em;padding:4px 16px;border-radius:8px;display:inline-block;}
+        .hero .chg.up {background:rgba(63,185,80,0.2);color:var(--green);}
+        .hero .chg.down {background:rgba(248,81,73,0.2);color:var(--red);}
+        table {width:100%;border-collapse:collapse;}
+        th {text-align:left;padding:8px 12px;color:var(--sub);border-bottom:1px solid var(--border);font-size:0.9em;}
+        td {border-bottom:1px solid rgba(48,54,61,0.5);padding:8px 12px;}
+        .dir-badge {display:inline-block;padding:6px 20px;border-radius:20px;font-size:1.3em;font-weight:bold;margin:10px 0;}
+        .warn {background:rgba(210,153,34,0.1);border:1px solid var(--yellow);border-radius:12px;padding:20px;margin-bottom:20px;}
+        .warn h2 {color:var(--yellow);margin-bottom:10px;}
+        .foot {text-align:center;color:var(--sub);font-size:0.85em;margin-top:30px;padding-top:20px;border-top:1px solid var(--border);}
+        @media(max-width:768px) {.hero .price {font-size:2.5em;}}
+    </style>
+</head>
+<body>
+<div class="c">
+
+    <!-- 标题头 -->
+    <div class="h">
+        <div style="font-size:2.5em;margin-bottom:4px;">&#926;</div>
+        <h1>ETH Daily Report</h1>
+        <p class="sub">2026-04-19 | 09:11 UTC+8</p>
+        <p style="color:var(--sub);font-size:0.85em;margin-top:4px;">MK Trading | bitebiwang1413</p>
+    </div>
+
+    <!-- ETH Hero -->
+    <div class="hero">
+        <div class="sym">ETH / USDT</div>
+        <div class="price">$2,347.72</div>
+        <div class="chg down">
+            &#9660; -3.26%
+        </div>
+        <div style="margin-top:12px;display:flex;justify-content:center;gap:24px;color:var(--sub);font-size:0.9em;">
+            <span>24h高: <span style="color:#3fb950;">$2,426.89</span></span>
+            <span>24h低: <span style="color:#f85149;">$2,344.31</span></span>
+            <span>ATH: $4,946.05 (-52.53%)</span>
+        </div>
+    </div>
+
+    <!-- ETH 概览卡片 -->
+    <div class="s">
+        <div class="sh">
+            <h2>&#128200; ETH 行情概览</h2>
+            <span class="tag">LIVE</span>
+        </div>
+        <div class="g" style="grid-template-columns:repeat(4,1fr);">
+            <div class="sc">
+                <div class="lbl">当前价格</div>
+                <div class="val">$2,347.72</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">24h涨跌</div>
+                <div class="val" style="color:#f85149;">-3.26%</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">1h涨跌</div>
+                <div class="val" style="color:#f85149;">-0.25%</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">7d涨跌</div>
+                <div class="val" style="color:#3fb950;">+2.72%</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">市值</div>
+                <div class="val">$283.72B</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">24h成交量</div>
+                <div class="val">$13.94B</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">流通供应量</div>
+                <div class="val">120.69M ETH</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">距ATH</div>
+                <div class="val" style="color:#f85149;">-52.53%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ETH 走势图 -->
+    <div class="s">
+        <div class="sh"><h2>&#128201; ETH 24H 价格走势</h2></div>
+        <div style="height:300px;">
+            <canvas id="priceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- 支撑阻力位 -->
+    <div class="s">
+        <div class="sh"><h2>&#127919; ETH 关键支撑/阻力位</h2><span class="tag">TECH</span></div>
+        <div class="g" style="grid-template-columns:repeat(4,1fr);">
+            <div class="sc">
+                <div class="lbl">阻力位 R2</div>
+                <div class="val" style="color:#f85149;">$2,487.56</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">阻力位 R1</div>
+                <div class="val" style="color:#f85149;">$2,451.16</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">支撑位 S1</div>
+                <div class="val" style="color:#3fb950;">$2,320.86</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">支撑位 S2</div>
+                <div class="val" style="color:#3fb950;">$2,285.70</div>
+            </div>
+        </div>
+        <div style="margin-top:12px;color:var(--sub);font-size:0.85em;">
+            * 基于近24h高低点估算，仅供参考，实际交易需结合更多技术指标
+        </div>
+    </div>
+
+    <!-- 资金费率 -->
+    <div class="s">
+        <div class="sh"><h2>&#128176; 资金费率 (Funding Rate)</h2><span class="tag">DERIVATIVES</span></div>
+        <div class="g" style="grid-template-columns:repeat(3,1fr);">
+            <div class="sc">
+                <div class="lbl">当前费率</div>
+                <div class="val" style="color:#d29922;">-0.0083%</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">标记价格</div>
+                <div class="val">$2,345.48</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">指数价格</div>
+                <div class="val">$2,346.88</div>
+            </div>
+        </div>
+        <div style="margin-top:12px;color:var(--sub);font-size:0.85em;">
+            * 资金费率 > 0.05% 表示多头过热；< 0 表示空头付费做多，可能反弹
+        </div>
+    </div>
+
+    <!-- 持仓量 -->
+    <div class="s">
+        <div class="sh"><h2>&#128202; 持仓量 (Open Interest)</h2><span class="tag">DERIVATIVES</span></div>
+        <div class="g" style="grid-template-columns:repeat(2,1fr);">
+            <div class="sc">
+                <div class="lbl">总持仓量</div>
+                <div class="val">2.16M ETH</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">持仓量估值</div>
+                <div class="val">$5.07B</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 多空比 -->
+    <div class="s">
+        <div class="sh"><h2>&#9878;&#65039; 多空比 (Long/Short Ratio)</h2><span class="tag">DERIVATIVES</span></div>
+        <div style="padding:16px;background:var(--card-h);border-radius:8px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                <span style="color:#3fb950;font-size:0.9em;">多头 63.8%</span>
+                <div style="flex:1;height:10px;background:#21262d;border-radius:5px;overflow:hidden;">
+                    <div style="width:63.75%;height:100%;background:linear-gradient(90deg,#3fb950,#238636);border-radius:5px;"></div>
+                </div>
+                <span style="color:#f85149;font-size:0.9em;">空头 36.2%</span>
+            </div>
+            <div style="text-align:center;font-size:1.2em;font-weight:bold;">
+                多空比: <span style="color:#3fb950">1.7586</span>
+            </div>
+        </div>
+        <div style="margin-top:12px;color:var(--sub);font-size:0.85em;">
+            * 多空比 > 1.5 多头拥挤需警惕回调；< 0.67 空头拥挤可能存在轧空机会
+        </div>
+    </div>
+
+    <!-- 爆仓数据 -->
+    <div class="s">
+        <div class="sh"><h2>&#128165; 24H 爆仓数据</h2><span class="tag">DERIVATIVES</span></div>
+        <div class="g" style="grid-template-columns:repeat(3,1fr);">
+            <div class="sc">
+                <div class="lbl">多头爆仓</div>
+                <div class="val" style="color:#f85149;">$0.00</div>
+                <div style="color:var(--sub);font-size:0.85em;">0 笔</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">空头爆仓</div>
+                <div class="val" style="color:#3fb950;">$0.00</div>
+                <div style="color:var(--sub);font-size:0.85em;">0 笔</div>
+            </div>
+            <div class="sc">
+                <div class="lbl">总爆仓金额</div>
+                <div class="val">$0.00</div>
+                <div style="color:var(--sub);font-size:0.85em;">0 笔</div>
+            </div>
+        </div>
+        <div style="margin-top:16px;">
+            <div style="height:20px;background:#21262d;border-radius:10px;overflow:hidden;display:flex;">
+                <div style="width:50%;background:linear-gradient(90deg,#f85149,#da3633);height:100%;"></div>
+                <div style="flex:1;background:linear-gradient(90deg,#238636,#3fb950);height:100%;"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:0.8em;color:var(--sub);">
+                <span style="color:#f85149;">&#9660; 多头爆仓 $0.00</span>
+                <span style="color:#3fb950;">空头爆仓 $0.00 &#9650;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 合约方向建议 -->
+    <div class="s" style="border-left:4px solid #f85149;">
+        <div class="sh">
+            <h2>&#128161; 合约方向建议</h2>
+            <span class="dir-badge" style="background:#f8514920;color:#f85149;border:1px solid #f85149;">
+                偏空
+            </span>
+        </div>
+        <p style="margin-bottom:16px;padding:12px;background:var(--card-h);border-radius:8px;color:var(--text);">
+            整体信号偏空，可关注反弹做空的机会。注意设置止损。
+        </p>
+        <h3 style="font-size:1em;margin-bottom:8px;color:var(--sub);">信号详情：</h3>
+        
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span style="color:#f85149;font-size:1.2em;">&#9660;</span>
+            <div>
+                <span style="color:#f85149;font-weight:bold;">[看空]</span>
+                <span style="color:var(--sub);"> 24h下跌3.26%，短期趋势偏空</span>
+            </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span style="color:#d29922;font-size:1.2em;">&#9679;</span>
+            <div>
+                <span style="color:#d29922;font-weight:bold;">[中性]</span>
+                <span style="color:var(--sub);"> 资金费率-0.0083%处于正常范围</span>
+            </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span style="color:#f85149;font-size:1.2em;">&#9660;</span>
+            <div>
+                <span style="color:#f85149;font-weight:bold;">[看空]</span>
+                <span style="color:var(--sub);"> 多空比1.76偏高，多头拥挤，警惕轧空或回调</span>
+            </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span style="color:#d29922;font-size:1.2em;">&#9679;</span>
+            <div>
+                <span style="color:#d29922;font-weight:bold;">[中性]</span>
+                <span style="color:var(--sub);"> 持仓量 2.16M ETH</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 风险提示 -->
+    <div class="warn">
+        <h2>&#9888;&#65039; 风险提示</h2>
+        <ul style="padding-left:20px;color:var(--sub);font-size:0.9em;">
+            <li>加密货币市场7x24运行，波动性极高，杠杆交易风险加倍</li>
+            <li>合约交易存在强制平仓风险，请严格控制仓位和杠杆倍数</li>
+            <li>资金费率、多空比等衍生品数据仅供参考，不构成交易信号</li>
+            <li>本报告由自动化系统生成，数据可能存在延迟或偏差</li>
+            <li>DYOR - 请自行研究后决策，理性交易</li>
+        </ul>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="foot">
+        <p>数据来源: CoinGecko | Binance</p>
+        <p>自动生成于 2026-04-19 09:11 | MK Trading</p>
+        <p>免责声明: 本报告仅供参考，不构成任何投资建议。投资有风险，入市需谨慎。</p>
+    </div>
+</div>
+
+<!-- Chart.js 走势图 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    (function() {
+        const labels = ['09:14','09:44','10:14','10:44','11:14','11:44','12:14','12:44','13:14','13:44','14:14','14:44','15:14','15:44','16:14','16:44','17:14','17:44','18:14','18:44','19:14','19:44','20:14','20:44','21:14','21:44','22:14','22:44','23:14','23:44','00:14','00:44','01:14','01:44','02:15','02:44','03:14','03:44','04:14','04:44','05:14','05:44','06:14','06:44','07:14','07:45','08:14','08:44'];
+        const prices = [2426.89,2422.77,2420.08,2421.44,2417.76,2416.10,2410.19,2407.36,2412.96,2407.96,2410.51,2410.90,2409.45,2404.83,2400.96,2372.85,2379.20,2377.43,2358.22,2360.53,2354.42,2347.92,2359.01,2355.47,2356.43,2350.27,2356.24,2360.59,2362.72,2362.74,2365.96,2364.98,2359.37,2362.40,2361.40,2344.31,2354.47,2348.27,2350.41,2352.78,2352.79,2352.22,2350.70,2354.31,2356.86,2353.70,2353.56,2345.66];
+        if (prices.length > 0) {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            const isUp = prices[0] <= prices[prices.length - 1];
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'ETH/USDT',
+                        data: prices,
+                        borderColor: isUp ? '#3fb950' : '#f85149',
+                        backgroundColor: isUp ? 'rgba(63,185,80,0.1)' : 'rgba(248,81,73,0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b949e' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b949e' } }
+                    }
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>
